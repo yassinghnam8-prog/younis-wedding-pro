@@ -1,66 +1,82 @@
-<svg class="character" viewBox="0 0 24 24"><path d="M12,2A5,5 0 0,1 17,7A5,5 0 0,1 12,12A5,5 0 0,1 7,7A5,5 0 0,1 12,2M12,14C17.5,14 22,16.24 22,19V22H2V19C2,16.24 6.5,14 12,14Z" /></svg>
-            <h2 style="color:var(--dark-gold); font-family:'Reem Kufi'">يونس</h2>
-        </div>
-        <div class="door right-door">
-            <svg class="character" viewBox="0 0 24 24"><path d="M12,2C15.31,2 18,4.66 18,7.89C18,11.12 12,19 12,19C12,19 6,11.12 6,7.89C6,4.66 8.69,2 12,2M12,11A3,3 0 0,0 15,8A3,3 0 0,0 12,5A3,3 0 0,0 9,8A3,3 0 0,0 12,11Z" /></svg>
-            <h2 style="color:var(--dark-gold); font-family:'Reem Kufi'">عفاف</h2>
-        </div>
-    </div>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعوة زفاف يونس وعفاف</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --gold: #b38b59; --bg: #fffdf9; }
+        body, html { margin: 0; padding: 0; height: 100%; background: var(--bg); font-family: 'Amiri', serif; overflow-x: hidden; }
 
-    <div class="main-content" id="mainContent">
-        <div class="invitation-card">
-            <div class="bismillah">بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ</div>
-            <div class="quran">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"</div>
-            
-            <p>بكل الحب نتشرف بدعوتكم لحضور حفل زفاف</p>
-            <h1>يونس وعفاف</h1>
+        /* غطاء الدعوة (الباب) */
+        #door-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; z-index: 1000; transition: 1.5s ease-in-out;
+        }
+        .door {
+            width: 50%; height: 100%; background: white;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            border: 1px solid #eee; transition: 1.5s cubic-bezier(0.7, 0, 0.3, 1);
+            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+        }
+        .left-door { border-right: 2px solid var(--gold); }
+        .right-door { border-left: 2px solid var(--gold); }
 
-            <div class="date-box">
-                الجمعة 15 مايو 2026
-            </div>
+        .door-icon { width: 60px; height: 60px; fill: var(--gold); margin-bottom: 15px; }
+        .door h2 { font-family: 'Cairo', sans-serif; color: #444; font-size: 1.2rem; }
 
-            <p>قاعة الملكة - اسطنها (طريق بنها)</p>
-            
-            <a href="https://maps.google.com" target="_blank" class="location-link">📍 موقع القاعة على الخريطة</a>
-        </div>
-    </div>
-
-    <script>
-        function openDoor() {
-            // فتح الأبواب
-            document.getElementById('doorContainer').classList.add('opened');
-            document.getElementById('btn').style.display = 'none';
-            
-            // إظهار المحتوى الداخلي تدريجياً
-            setTimeout(() => {
-                document.getElementById('mainContent').classList.add('show-content');
-            }, 500);
-
-            // إطلاق الورد
-            for (let i = 0; i < 50; i++) {
-                createPetal();
-            }
+        .open-btn {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            z-index: 1001; padding: 12px 30px; background: var(--gold); color: white;
+            border: none; border-radius: 50px; cursor: pointer; font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); font-family: 'Cairo', sans-serif;
         }
 
-        function createPetal() {
-            const petal = document.createElement('div');
-            petal.className = 'petal';
-            
-            // خصائص عشوائية للورد
-            const size = Math.random() * 10 + 10 + 'px';
-            petal.style.width = size;
-            petal.style.height = size;
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.animationDuration = Math.random() * 2 + 3 + 's'; // سرعات مختلفة
-            petal.style.opacity = Math.random();
-            
-            document.body.appendChild(petal);
+        /* حركة الفتح */
+        .opened .left-door { transform: translateX(-100%); }
+        .opened .right-door { transform: translateX(100%); }
+        .opened .open-btn { opacity: 0; pointer-events: none; }
 
-            // حذف الوردة بعد انتهاء الحركة عشان المتصفح ميهنجش
-            setTimeout(() => {
-                petal.remove();
-            }, 5000);
+        /* المحتوى الداخلي */
+        .content-wrapper {
+            max-width: 450px; margin: 40px auto; padding: 30px;
+            text-align: center; border: 1px solid var(--gold);
+            background: white; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-    </script>
-</body>
-</html>
+        .bismillah { font-size: 0.9rem; color: #888; margin-bottom: 20px; }
+        .quran { color: var(--gold); font-size: 1.1rem; line-height: 1.6; margin-bottom: 30px; }
+        h1 { font-size: 2.8rem; margin: 10px 0; color: #222; }
+        .date { font-weight: bold; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 15px 0; margin: 20px 0; }
+        .loc-btn {
+            display: block; padding: 12px; border: 1px solid var(--gold);
+            color: var(--gold); text-decoration: none; border-radius: 5px; margin-top: 25px;
+        }
+
+        /* بتلات الورد */
+        .petal {
+            position: fixed; background: #e84118; border-radius: 150% 0 150% 0;
+            z-index: 1500; pointer-events: none; animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<button class="open-btn" onclick="startApp()">اضغط لفتح الدعوة</button>
+
+<div id="door-overlay">
+    <div class="door left-door">
+        <svg class="door-icon" viewBox="0 0 24 24"><path d="M12,2A5,5 0 0,1 17,7A5,5 0 0,1 12,12A5,5 0 0,1 7,7A5,5 0 0,1 12,2M12,14C17.5,14 22,16.24 22,19V22H2V19C2,16.24 6.5,14 12,14Z"/></svg>
+        <h2>يونس</h2>
+    </div>
+    <div class="door right-door">
+        <svg class="door-icon" viewBox="0 0 24 24"><path d="M12,2C15.31,2 18,4.66 18,7.89C18,11.12 12,19 12,19C12,19 6,11.12 6,7.89C6,4.66 8.69,2 12,2M12,11A3,3 0 0,0 15,8A3,3 0 0,0 12,5A3,3 0 0,0 9,8A3,3 0 0,0 12,11Z"/></svg>
+        <h2>عفاف</h2>
+    </div>
+</div>
+
+<div class="content-wrapper">
+    <div class="bismillah">بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ</div>
