@@ -1,0 +1,66 @@
+<svg class="character" viewBox="0 0 24 24"><path d="M12,2A5,5 0 0,1 17,7A5,5 0 0,1 12,12A5,5 0 0,1 7,7A5,5 0 0,1 12,2M12,14C17.5,14 22,16.24 22,19V22H2V19C2,16.24 6.5,14 12,14Z" /></svg>
+            <h2 style="color:var(--dark-gold); font-family:'Reem Kufi'">يونس</h2>
+        </div>
+        <div class="door right-door">
+            <svg class="character" viewBox="0 0 24 24"><path d="M12,2C15.31,2 18,4.66 18,7.89C18,11.12 12,19 12,19C12,19 6,11.12 6,7.89C6,4.66 8.69,2 12,2M12,11A3,3 0 0,0 15,8A3,3 0 0,0 12,5A3,3 0 0,0 9,8A3,3 0 0,0 12,11Z" /></svg>
+            <h2 style="color:var(--dark-gold); font-family:'Reem Kufi'">عفاف</h2>
+        </div>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <div class="invitation-card">
+            <div class="bismillah">بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيمِ</div>
+            <div class="quran">"وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"</div>
+            
+            <p>بكل الحب نتشرف بدعوتكم لحضور حفل زفاف</p>
+            <h1>يونس وعفاف</h1>
+
+            <div class="date-box">
+                الجمعة 15 مايو 2026
+            </div>
+
+            <p>قاعة الملكة - اسطنها (طريق بنها)</p>
+            
+            <a href="https://maps.google.com" target="_blank" class="location-link">📍 موقع القاعة على الخريطة</a>
+        </div>
+    </div>
+
+    <script>
+        function openDoor() {
+            // فتح الأبواب
+            document.getElementById('doorContainer').classList.add('opened');
+            document.getElementById('btn').style.display = 'none';
+            
+            // إظهار المحتوى الداخلي تدريجياً
+            setTimeout(() => {
+                document.getElementById('mainContent').classList.add('show-content');
+            }, 500);
+
+            // إطلاق الورد
+            for (let i = 0; i < 50; i++) {
+                createPetal();
+            }
+        }
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            
+            // خصائص عشوائية للورد
+            const size = Math.random() * 10 + 10 + 'px';
+            petal.style.width = size;
+            petal.style.height = size;
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 2 + 3 + 's'; // سرعات مختلفة
+            petal.style.opacity = Math.random();
+            
+            document.body.appendChild(petal);
+
+            // حذف الوردة بعد انتهاء الحركة عشان المتصفح ميهنجش
+            setTimeout(() => {
+                petal.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
